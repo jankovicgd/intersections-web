@@ -1,0 +1,25 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+a span {
+  margin: auto 10px;
+}
+
+.container-fluid .row .col-lg-12 {
+  padding: 0;
+}
+
+.panel.panel-default.panel-footer {
+    margin-bottom: 0px;
+    bottom: 0;
+    height: 20vh;
+    width: 100%;
+    position: fixed;
+}
+
+.easy-autocomplete.eac-square {
+  width: 100% !important;
+}

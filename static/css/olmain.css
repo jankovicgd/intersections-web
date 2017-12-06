@@ -1,0 +1,16 @@
+.map {
+  padding-top: 50px;
+  height: 80vh;
+  width: 100vw;
+}
+
+.ol-mycontrol {
+    padding: 5px;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+}
+
+.ol-mycontrol .btn {
+  margin: auto 3px;
+}

@@ -1,0 +1,190 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Links and header -->
+    <meta
+        content="text/html;charset=utf-8"
+        http-equiv="Content-Type">
+    <meta
+        content="utf-8"
+        http-equiv="encoding">
+    <meta
+        http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <meta
+        name="viewport"
+        content="width=device-width,height=device-height,initial-scale=1.0"/>
+    <link
+        rel="stylesheet"
+        href="https://openlayers.org/en/v4.4.1/css/ol.css"
+        type="text/css">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/olmain.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}">
+    <link
+        rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='ezac/easy-autocomplete.min.css') }}">
+    <title>Intersections</title>
+  </head>
+  <body>
+    <!-- Nav Bar for functionality -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>Intersections</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#" id="clear">Clear canvas</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Area selection<span class="caret"></span></a>
+              <ul id="typeselector "class="dropdown-menu">
+                <li id="extent"><a href="#">Map extent</a></li>
+                <li id="polygon" class="active"><a href="#">Polygon</a></li>
+              </ul>
+            </li>
+            <!-- Button trigger search modal -->
+            <li><a href="#" data-toggle="modal" data-target="#searchModal">Search</a></li>
+            <!-- Button trigger help modal -->
+            <li><a href="#" data-toggle="modal" data-target="#myModal">Help</a></li>
+          </ul>
+
+          <!-- Form to submit to the server -->
+          <form action="{{ url_for('home') }}" class="navbar-form navbar-right" method="POST">
+            <div class="form-group">
+              <label for="sel1">Type of Street</label>
+              <select name="selection" class="form-control" id="sel1">
+                <option value="walking">Walking street</option>
+                <option value="allxhighway">All types excluding highway</option>
+                <option value="alltypes">All types</option>
+              </select>
+              <input id="features" type="hidden" name="features"/>
+              <input id="extent" type="hidden" name="extent"/>
+              <input id="xtentpoly" type="hidden" name="xtentpoly"/>
+            </div>
+            <button id="mainsubmit" type="submit" class="btn btn-primary" name="submit" >Submit</button>
+          </form>
+
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <!-- Map div -->
+      <div class="row">
+        <div class="col-lg-12">
+          <!-- Map element -->
+          <div id="map" class="map"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results panel -->
+    <div class="panel panel-default panel-footer bottom">
+      <div class="panel-heading">
+        <h3 class="panel-title">Results</h3>
+      </div>
+      <div class="panel-body">
+        Draw polygon to get the results.
+        <br>
+        <button id="#export" name="export" class="btn btn-primary">Export</button>
+      </div>
+    </div>
+
+    <!-- Help Modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Help</h4>
+          </div>
+          <div class="modal-body">
+            Instructions
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Search Modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Search</h4>
+          </div>
+          <div class="modal-body">
+            <!-- Input group for search  -->
+            <div class="form-group">
+              <input class="form-control" id="searchstring" placeholder="Enter city or area">
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-dismiss="modal" type="button" id="drawpoly">Draw Polygon</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script
+        src="https://openlayers.org/en/v4.4.1/build/ol.js"
+        type="text/javascript">
+    </script>
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script
+        src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+        crossorigin="anonymous"></script>
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        charset="utf-8">
+    </script>
+    <script
+        type="text/javascript"
+        src="{{ url_for('static', filename='js/olmain.js') }}">
+    </script>
+    <script
+        src="{{ url_for('static', filename='ezac/jquery.easy-autocomplete.min.js') }}"
+        charset="utf-8">
+    </script>
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+        charset="utf-8">
+    </script>
+    <!-- <script
+        src="{{ url_for('static', filename='js/req.js') }}"
+        charset="utf-8"> -->
+    </script>
+    <script
+        src="{{ url_for('static', filename='js/serverreq.js') }}"
+        charset="utf-8">
+    </script>
+  </body>
+</html>
