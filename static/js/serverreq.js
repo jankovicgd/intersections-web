@@ -1,6 +1,8 @@
 $('#mainsubmit').click(function() {
     var features = getMapFeatures();
+    var extent2 = getMapExtent();
     $("#features").val(features);
     $("#xtentpoly").val(selector);
-    $("#extent").val(getMapExtent());
+    $("#selection").val(selector2);
+    $("#sizeextent").val(extent2);
 });

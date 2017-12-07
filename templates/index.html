@@ -32,7 +32,7 @@
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='ezac/easy-autocomplete.min.css') }}">
-    <title>Intersections</title>
+    <title>Junctions</title>
   </head>
   <body>
     <!-- Nav Bar for functionality -->
@@ -46,13 +46,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>Intersections</a>
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>Junctions</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li><a href="#" id="clear">Clear canvas</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Type of street<span class="caret"></span></a>
+              <ul id="typeselector "class="dropdown-menu">
+                <li id="walking"><a href="#">Walking street</a></li>
+                <li id="allxhighway"><a href="#">All types excluding highway</a></li>
+                <li id="alltypes" value="alltypes" class="active"><a href="#">All types</a></li>
+              </ul>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Area selection<span class="caret"></span></a>
               <ul id="typeselector "class="dropdown-menu">
@@ -69,14 +76,15 @@
           <!-- Form to submit to the server -->
           <form action="{{ url_for('home') }}" class="navbar-form navbar-right" method="POST">
             <div class="form-group">
-              <label for="sel1">Type of Street</label>
+              <!-- <label for="sel1">Type of Street</label>
               <select name="selection" class="form-control" id="sel1">
                 <option value="walking">Walking street</option>
                 <option value="allxhighway">All types excluding highway</option>
                 <option value="alltypes">All types</option>
-              </select>
+              </select> -->
+              <input id="selection" type="hidden" name="selection"/>
               <input id="features" type="hidden" name="features"/>
-              <input id="extent" type="hidden" name="extent"/>
+              <input id="sizeextent" type="hidden" name="sizeextent"/>
               <input id="xtentpoly" type="hidden" name="xtentpoly"/>
             </div>
             <button id="mainsubmit" type="submit" class="btn btn-primary" name="submit" >Submit</button>
@@ -93,18 +101,6 @@
           <!-- Map element -->
           <div id="map" class="map"></div>
         </div>
-      </div>
-    </div>
-
-    <!-- Results panel -->
-    <div class="panel panel-default panel-footer bottom">
-      <div class="panel-heading">
-        <h3 class="panel-title">Results</h3>
-      </div>
-      <div class="panel-body">
-        Draw polygon to get the results.
-        <br>
-        <button id="#export" name="export" class="btn btn-primary">Export</button>
       </div>
     </div>
 
@@ -177,10 +173,6 @@
     <script
         src="{{ url_for('static', filename='js/main.js') }}"
         charset="utf-8">
-    </script>
-    <!-- <script
-        src="{{ url_for('static', filename='js/req.js') }}"
-        charset="utf-8"> -->
     </script>
     <script
         src="{{ url_for('static', filename='js/serverreq.js') }}"

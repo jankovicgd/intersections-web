@@ -12,14 +12,10 @@ a span {
   padding: 0;
 }
 
-.panel.panel-default.panel-footer {
-    margin-bottom: 0px;
-    bottom: 0;
-    height: 20vh;
-    width: 100%;
-    position: fixed;
-}
-
 .easy-autocomplete.eac-square {
   width: 100% !important;
+}
+
+.res-wrap {
+  padding-top: 60px;
 }

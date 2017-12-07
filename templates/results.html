@@ -33,7 +33,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ url_for('home') }}"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>Intersections</a>
+          <a class="navbar-brand" href="{{ url_for('home') }}"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>Junctions</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -47,7 +47,11 @@
     </nav>
 
     <!-- Content should go here -->
-
+    <div class="res-wrap">
+      <h3>Results and report</h3>
+      {{results}}
+    </div>
+    
     <!-- Help Modal -->
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

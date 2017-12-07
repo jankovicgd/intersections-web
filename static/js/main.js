@@ -4,6 +4,7 @@
 // });
 
 var selector = "polygon";
+var selector2 = "alltypes";
 
 $(document).ready(function() {
   // Highlighting for different options within dropdowns
@@ -31,6 +32,18 @@ $(document).ready(function() {
   $("#search").click(function(){
     $(".input-group").show();
     map.removeInteraction(draw);
+  });
+
+  $("#walking").click(function(){
+    selector2 = "walking";
+  });
+
+  $("#allxhighway").click(function(){
+    selector2 = "allxhighway";
+  });
+
+  $("#alltypes").click(function(){
+    selector2 = "alltypes";
   });
 
   // Function that triggers when clicked on button Draw Polygon
