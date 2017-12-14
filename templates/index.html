@@ -40,7 +40,7 @@
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-main" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -50,7 +50,7 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="nav-main">
           <ul class="nav navbar-nav">
             <li><a href="#" id="clear">Clear canvas</a></li>
             <li class="dropdown">
@@ -76,12 +76,6 @@
           <!-- Form to submit to the server -->
           <form action="{{ url_for('home') }}" class="navbar-form navbar-right" method="POST">
             <div class="form-group">
-              <!-- <label for="sel1">Type of Street</label>
-              <select name="selection" class="form-control" id="sel1">
-                <option value="walking">Walking street</option>
-                <option value="allxhighway">All types excluding highway</option>
-                <option value="alltypes">All types</option>
-              </select> -->
               <input id="selection" type="hidden" name="selection"/>
               <input id="features" type="hidden" name="features"/>
               <input id="sizeextent" type="hidden" name="sizeextent"/>
@@ -94,6 +88,7 @@
       </div>
     </nav>
 
+    <!-- Page Container -->
     <div class="container-fluid">
       <!-- Map div -->
       <div class="row">
@@ -105,7 +100,6 @@
     </div>
 
     <!-- Help Modal -->
-    <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -123,7 +117,6 @@
       </div>
     </div>
     <!-- Search Modal -->
-    <!-- Modal -->
     <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -178,5 +171,6 @@
         src="{{ url_for('static', filename='js/serverreq.js') }}"
         charset="utf-8">
     </script>
+
   </body>
 </html>
