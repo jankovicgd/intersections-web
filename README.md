@@ -1,6 +1,6 @@
-# junctionsweb
+# intersections-web
 
-Web application for TUW intersections. Available at https://intersections.geo.tuwien.ac.at/
+Web application for TUW intersections work. Available at https://intersections.geo.tuwien.ac.at/
 
 Main functionalities are selection with a Polygon, Search and Extent for road and path intersections, i.e. all walkable intersections.
 
