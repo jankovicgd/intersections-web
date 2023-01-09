@@ -6,7 +6,7 @@ function nominatimCORS(search) {
     jsonp: "callback",
     url: 'https://open.mapquestapi.com/nominatim/v1/search.php',
     data: {
-      key: 'ulnELEJ6G7YEs0qvbjD04YDO8B9V1NyP',
+      key: 'key',
       q: search,
       format: "json",
       polygon_geojson: 1,
